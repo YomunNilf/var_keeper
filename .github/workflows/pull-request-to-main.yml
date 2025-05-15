@@ -5,16 +5,19 @@ on:
     branches:
       - 'main'
 jobs:
-  unit_testing:
+  integration_testing:
     runs-on: self-hosted
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Run Unit Tests
-        run: |
-          chmod +x ./test/unit-tests.sh
-          ./test/unit-tests.sh
-        
+    container: python:3.12.3-slim
+    services:
+      db:
+        image: mysql
+        env:
+          MYSQL_ROOT_PASSWORD: 123
+        options: >-
+          --health-cmd "mysqladmin ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
   integration_testing:
     needs: unit_testing
     runs-on: self-hosted
