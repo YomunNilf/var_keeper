@@ -37,8 +37,6 @@ jobs:
         run: |
           chmod +x ./test/integration-tests.sh
           ./test/integration-tests.sh
-      - name: Stop app
-        run: kill -15 `cat app_pid`
           
   mega_hard_testing:
     needs: [unit_testing, integration_testing]
