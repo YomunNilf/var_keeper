@@ -1,4 +1,7 @@
+
 name: Unit Tests
+- name: Checkout
+  uses: actions/checkout@v4
 run-name: Run Unit Tests
 on:
   push:
